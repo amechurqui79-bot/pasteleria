@@ -43,7 +43,107 @@
             <h2>Horario</h2> 
             <p>Lunes a sabado, de 09:00 a 13:00 y de 15:00 a 20.00.</p>
             </section>
+             <table>
+          <caption>Precios de los pasteles y disponibilidad</caption>
+          <thead>
+            <tr>
+              <th scope="col">Pasteles</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Disponible</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Pastel de dia a día</td>   <td>Bs 40</td>  <td>Todos los días</td></tr>
+            <tr><td>Selva negra</td>  <td>Bs 100</td>  <td>Todos los días</td></tr>
+            <tr><td>Torta frutal</td>  <td>Bs 80</td> <td>Lunes y jueves</td></tr>
+            <tr><td>Tres leches</td>  <td>Bs 150</td> <td>Lunes y sabado</td></tr>
+          </tbody>
+        </table>
+          <figure>
+          <img src="imagen.8.jpg"
+               alt="Vitrina con pasteles recién horneados ordenados en bandejas"
+               width="600" height="400">
+          <figcaption>La vitrina a primera hora de la mañana.</figcaption>
+        </figure>
+      </section>
+       <section id="pedido">
+        <h2>Hacer un pedido</h2>
 
+        <form action="/pedido" method="post">
+
+          <fieldset>
+            <legend>Tus datos</legend>
+
+            <p>
+              <label for="nombre">Nombre completo</label>
+              <!-- autocomplete deja que el navegador ofrezca datos ya guardados.
+                   required hace que el navegador impida enviar el campo vacío. -->
+              <input type="text" id="nombre" name="nombre"
+                     autocomplete="name" required>
+            </p>
+
+            <p>
+              <label for="email">Correo electrónico</label>
+              <input type="email" id="email" name="email"
+                     autocomplete="email" required>
+            </p>
+
+            <p>
+              <label for="telefono">Teléfono</label>
+              <!-- pattern valida con una expresión regular: aquí, de 7 a 8 dígitos.
+                   El title es el mensaje que el navegador muestra si no cumple.
+                   Sin title, el aviso de error no dice qué se espera. -->
+              <input type="tel" id="telefono" name="telefono"
+                     autocomplete="tel" pattern="[0-9]{7,8}"
+                     title="7 u 8 dígitos, sin espacios">
+            </p>
+          </fieldset>
+
+          <fieldset>
+            <legend>Tu pedido</legend>
+
+            <p>
+              <label for="Pasteles">pasteles</label>
+              <!-- La primera <option> va vacía a propósito: con required,
+                   obliga a elegir en vez de aceptar la primera por descuido. -->
+              <select id="producto" name="producto" required>
+                <option value="">Elige uno</option>
+                <option value="pastel-dia">Pastel del día</option>
+                <option value="torta-frutal">Torta frutal</option>
+                <option value="selva-negra">Selva negra</option>
+                <option value="tres-leches">Tres leches</option></option>
+              </select>
+            </p>
+
+            <p>
+              <label for="cantidad">Cantidad</label>
+              <input type="number" id="cantidad" name="cantidad"
+                     min="1" max="100" value="1" required>
+            </p>
+
+            <p>
+              <label for="fecha">Fecha de entrega</label>
+              <input type="date" id="fecha" name="fecha" required>
+            </p>
+
+            <p>
+              <label for="notas">Alguna indicación</label>
+              <textarea id="notas" name="notas" rows="3"></textarea>
+            </p>
+
+            <p>
+              <!-- En un checkbox el label va DESPUÉS del input, no antes:
+                   así se lee como la frase que el usuario acepta. -->
+              <input type="checkbox" id="terminos" name="terminos" required>
+              <label for="terminos">Acepto que el pedido se confirma por teléfono</label>
+            </p>
+          </fieldset>
+
+          <!-- type="submit" es el que envía. Sin type explícito un <button>
+               dentro de un form ya envía, pero declararlo evita sorpresas. -->
+          <button type="submit">Enviar pedido</button>
+        </form>
+      </section>
             </main>
             <aside>
                 <h2>¿Sabias?</h2>

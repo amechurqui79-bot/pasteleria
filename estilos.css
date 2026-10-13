@@ -200,6 +200,221 @@ footer {
   transform: translateY(-4px);
   box-shadow: 0 5px 15px #E8A0B433;
 }
+:root {
+  --color-principal: #c83270;
+  --color-acento: #e95791;
+  --color-texto: #71364f;
+  --color-fondo: #fff3f7;
+  --color-superficie: #ffffff;
+  --borde: #f3c6d7;
+  --radio: 16px;
+}
 
+/* Página */
+body {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 32px;
+  background: var(--color-fondo);
+  color: var(--color-texto);
+}
+
+/* Encabezado */
+header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 28px 0;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--borde);
+}
+
+header h1 {
+  margin: 0;
+  color: var(--color-principal);
+  font-size: clamp(1.8rem, 3vw, 2.7rem);
+}
+
+header p {
+  margin: 0;
+}
+
+/* Menú horizontal */
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  margin: 0;
+}
+
+nav a {
+  color: var(--color-texto);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: var(--color-acento);
+}
+
+/* Título de productos */
+#productos h2 {
+  margin-top: 12px;
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+}
+
+#productos > p {
+  margin-bottom: 28px;
+}
+
+/* Cuadrícula de pasteles */
+.contenedor-pasteles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 22px;
+}
+
+/* Tarjetas */
+.contenedor-pasteles .pastel {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 12px;
+  padding: 16px;
+  margin: 0;
+  overflow: hidden;
+  background: var(--color-superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: 0 5px 18px rgb(112 49 76 / 7%);
+  transition: transform 0.2s ease,
+              box-shadow 0.2s ease;
+}
+
+.contenedor-pasteles .pastel:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 24px rgb(112 49 76 / 13%);
+}
+
+/* Todas las fotos con el mismo tamaño */
+.contenedor-pasteles .pastel img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.contenedor-pasteles .pastel h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  color: var(--color-principal);
+}
+
+.contenedor-pasteles .pastel p {
+  margin: 0;
+}
+
+.contenedor-pasteles .pastel .precio {
+  margin-top: auto;
+  padding-top: 10px;
+  color: var(--color-principal);
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+/* Imagen de la vitrina, fuera de las tarjetas */
+.vitrina {
+  margin: 32px 0;
+}
+
+.vitrina img {
+  width: 100%;
+  max-width: 650px;
+  height: auto;
+  display: block;
+  border-radius: var(--radio);
+}
+
+.vitrina figcaption {
+  margin-top: 8px;
+  font-size: 0.9rem;
+}
+
+/* Panel lateral */
+aside {
+  align-self: start;
+  margin-top: 0;
+  padding: 24px;
+  background: #ffe3ed;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+}
+
+
+aside h2 {
+  margin-top: 0;
+}
+
+/* Tabla */
+caption {
+  color: var(--color-texto);
+  font-weight: 600;
+}
+
+/* Pie */
+footer {
+  color: var(--color-texto);
+}
+
+/* Pantallas medianas */
+@media (max-width: 1000px) {
+  .contenedor-pasteles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Celulares ...*/
+@media (max-width: 600px) {
+  body {
+    padding: 0 16px;
+  }
+
+  header {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 20px 0;
+  }
+
+  nav ul {
+    gap: 12px 18px;
+  }
+
+  .contenedor-pasteles {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .contenedor-pasteles .pastel {
+    padding: 14px;
+  }
+}
+@media (min-width: 40rem){
+  h1 { font-size: 2.5rem;}
+  hearder {padding-inline:var(--espacio-lg)}
+  nav ul{gap: var(--espacio-lg)}
+}
 
 

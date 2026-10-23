@@ -6,22 +6,27 @@
 
 ## Qué resuelve
 [2-3 frases: qué problema tiene tu cliente y cómo lo ayuda este sitio.
-El proyecto Pastelería Dulce Tentación consiste en una página web creada para presentar los productos de una pastelería, como tortas, pasteles . El sitio permite que los clientes conozcan los productos de manera visual y encuentren información del negocio de forma rápida y sencilla. Su objetivo es mejorar la presentación del negocio y atraer a más clientes a través de Internet.]
+Mi cliente tiene el problema de que la pasteleria no pueda mostrar todos sus productos y para eso decidimos crear un sitio web donde esten y se muestren los productos para que el cliente lo vea de forma mas rapida y pueda hacer directamente el pedido.]
 
 ## Cómo está construido
 - **Semántica:** [qué elementos usaste y dónde.
-Utilicé HTML para organizar el contenido de la página y CSS para darle estilo. Empleé elementos como header para la cabecera, nav para el menú de navegación, main para el contenido principal, section para organizar las secciones de productos y footer para el pie de página.]
+El header la cabezera en la barra de navegacion de la pagina.
+El menú , main para el contenido principal.
+EL section,fue para separar los bloques.
+El article, lo use para que tenga bloques de los pasteles y asi el cliente pueda elegir que pastel puede pedir]
 - **Layout:** [dónde Flexbox, dónde Grid, y por qué. 
-Utilicé Flexbox para organizar elementos como el menú de navegación y alinear el contenido. También utilicé Grid para distribuir las imágenes de tortas y pasteles en filas y columnas, para una presentación ordenada de los productos.]
+Flexbox lo utilicé para alinear y poder mover las imagenes de centro al costado.
+y el Grid me permitio para organizar las filas y columnas .]
 - **Diseño:** [paleta y tipografía, y por qué las elegiste.
- Elegí colores rosados, blancos y tonos suaves, relacionados con pastelería, para transmitir dulzura, elegancia . Utilicé una tipografía legible para facilitar la lectura y conseguir que la página sea agradable para los visitantes.]
+ Yo elegí los colores rosas y claros para que combine, el negocio es de una pasteleria y esos colores le quedan bien.]
 
 ## Capturas
-![Escritorio](Captura.JPG)
-![Móvil 375px](ruta/a/captura-movil.png) DESPUES, PROXIMA SEMANA
+![Escritorio](captura.jpg)
+*(Captura móvil 375px: próxima semana)*
 
 ## Lo más difícil
 [Qué problema técnico te costó más y cómo lo resolviste. Sé específico:
-"el menú se salía de la pantalla en móvil y lo resolví con flex-wrap"
-vale; "fue difícil pero lo logré" no vale.
-Una de las partes más difíciles fue organizar los elementos de la página para que las imágenes de los pasteles y el contenido se vieran ordenados y atractivos. También fue importante adaptar el diseño para que pudiera visualizarse correctamente en diferentes tamaños de pantalla. Para solucionarlo, utilicé propiedades de CSS para controlar la distribución, el tamaño y la separación de los elementos, procurando mantener una presentación clara y organizada.]
+Una de las cosas mas dificiles fue el alinear los pasteles para que se vea de una forma bonita y presentable.]
+
+## Laboratorio 2
+El dia de hoy añadimos lo que es el filtrador y el buscador para que el cliente pueda buscar el pastel por categorias y para ver que producto esta disponible en la pasteleria. Y se añadio lo que es eventos.js, app.js, datos.js, funciones.js, render.js

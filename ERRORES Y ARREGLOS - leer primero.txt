@@ -1,0 +1,65 @@
+ERRORES Y ARREGLOS DE TU PROYECTO: Dulce Tentación (21 de octubre)
+========================================================================
+
+Amalia_Patty_Churqui_1 es tu proyecto con todo arreglado. Tu carpeta original no se tocó.
+Ábrela con live-server y revisa cada cambio antes de hacer tu commit. La guía "Depurar el render"
+explica cada uno de estos errores.
+
+1. POR QUÉ "app.js" NO CARGABA
+------------------------------
+- El archivo se llamaba "app .js", con un espacio antes del punto. Tu index pide "app.js": el
+  navegador no lo encontraba (error 404 en la consola).
+  -> Renombrado a app.js.
+
+2. LAS TARJETAS
+---------------
+- Tenías dos listas: tus 4 pasteles escritos a mano (con foto) y, más abajo, "Productos desde
+  JavaScrip" con las 8 tarjetas generadas, sin foto. La idea del Día 8 es que haya UNA sola, la
+  generada.
+  -> Los 4 <article> escritos a mano se cambiaron por <div id="lista-productos">, dentro de
+     "Nuestros pasteles", y se quitó la sección de abajo.
+  -> datos.js: los 4 primeros pasteles tienen ahora imagen y descripcion (las de tus tarjetas).
+  -> render.js: crearTarjeta muestra la foto y la descripción si el producto las tiene, y usa
+     tu clase .pastel, así las tarjetas tienen tu diseño.
+
+3. EL HTML
+----------
+- <meta name="viewport" content="width=device_-width, initial_scala=1.0"> tenía dos errores de
+  escritura: el celular no adaptaba la página. -> width=device-width, initial-scale=1.0
+- El menú usaba <ul> donde iba <li>, y quedaba un ">" de más: en pantalla se veía "Pasteles >".
+- </main> estaba justo después del header: el <main> se cerraba antes del contenido.
+  -> Ahora <main> envuelve las secciones.
+- "</section id="horarios">" era una etiqueta de cierre: la sección de horarios nunca se abría,
+  y la tabla quedaba suelta. -> <section id="horarios"> con su tabla adentro.
+- <label for="Pasteles"> no coincidía con el id del select ("producto"), y sobraba un </option>.
+- Tildes: "Pastel del día", "Lunes a sábado", y "20.00" pasó a "20:00".
+
+4. LOS SCRIPTS
+--------------
+- app.js: "pastelesPan", "precioPan" y "panesEnVitrina" no existían ("is not defined"): eran
+  nombres de la demo de la panadería. -> precioPastel y selvaNegra, que son tuyos.
+- app.js escribía el aviso de stock encima de tu eslogan. -> Ahora va en un <p id="aviso-stock">.
+- datos.js: quedaban datos de la demo ("Pan del día", "panes", "Pan de ayer"). -> Pasteles.
+  nombres.includes("queque de platono") nunca podía dar true. -> "Queque de platano".
+- funciones.js: panesVendidos -> tortasVendidas.
+
+5. NOMBRES DE ARCHIVO
+---------------------
+- Sin espacios: "selva negra.jpg" -> selva-negra.jpg, "selva negra1..jpg" -> selva-negra-1.jpg
+  (tenía dos puntos), "torta frutal.jpg" -> torta-frutal.jpg, "tres leches.jpg" -> tres-leches.jpg,
+  Captura.JPG -> captura.jpg (también en tu README).
+
+CÓMO PASAR ESTOS ARREGLOS A TU PROYECTO
+---------------------------------------
+Tu carpeta .git no llegó en el Drive: es la que guarda la historia de tus commits (está oculta).
+No crees otro repositorio. Haz esto:
+
+  1. Abre la carpeta de tu proyecto en tu memoria o tu computadora, la que tiene tus commits.
+  2. Copia ahí TODOS los archivos de esta carpeta y elige "Reemplazar".
+  3. En Git Bash, dentro de esa carpeta:
+
+        git add .
+        git commit -m "fix: las tarjetas se generan desde los datos, con foto"
+
+  Así el arreglo queda en tu misma historia, y git push lo sube a tu mismo GitHub.
+  Si de verdad no tienes otra carpeta con .git, avisa al docente: ahí sí se hace git init.

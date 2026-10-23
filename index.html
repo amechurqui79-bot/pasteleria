@@ -1,177 +1,191 @@
-
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device_-width, initial_scala=1.0">
-        <meta name="description" content="Pasteleria del barrio.">
-        <title>Dulce Tentacion</title>
-        <link  rel="stylesheet" href="estilos.css">
-    </head>
-    <body>
-        <header>
-            <h1>Dulce Tentacion</h1>
-            <p>Pasteleria del barrio</p>
-            <nav>
-                <ul>
-                    <ul><a href="#productos">Pasteles</a>></li>
-                    <ul><a href="#horarios">Horarios</a>></li>
-                    <ul><a href="#contacto">Contacto</a>></li>
-                    </ul>
-                </nav>
-                </header>
-            </main>
-           <section id="productos">
-  <h2>Nuestros pasteles</h2>
-  <p>Delicias preparadas con amor para endulzar tu día.</p>
 
-  <div class="contenedor-pasteles">
-    
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pasteleria del barrio.">
+  <title>Dulce Tentación</title>
+  <link rel="icon" type="image/jpeg" href="logo.jpg">
+  <link rel="stylesheet" href="estilos.css">
+</head>
 
-    <article class="pastel">
-      <img src="selva negra.jpg" alt="Pastel del día">
-      <h3>Pastel del día</h3>
-      <p>Una dulce sorpresa para cada día.</p>
-      <p class="precio">Bs 40</p>
-    </article>
+<body>
+  <header>
+    <div class="marca">
+      <img src="logo.jpg" alt="Logo de Dulce Tentación" class="logo">
+      <div class="marca-texto">
+        <h1>Dulce Tentación</h1>
+        <p>Pastelería del barrio</p>
+        <p id="aviso-stock"></p>
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#productos">Pasteles</a></li>
+        <li><a href="#horarios">Horarios</a></li>
+        <li><a href="#pedido">Hacer pedido</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <article class="pastel">
-      <img src="selva negra1..jpg" alt="Torta selva negra">
-      <h3>Selva negra</h3>
-      <p>Chocolate, crema y mucho sabor.</p>
-      <p class="precio">Bs 100</p>
-    </article>
+  <main>
+    <section id="productos">
+      <h2>Nuestros pasteles</h2>
+      <p>Delicias preparadas con amor para endulzar tu día.</p>
 
-    <article class="pastel">
-      <img src="torta frutal.jpg" alt="Torta frutal">
-      <h3>Torta frutal</h3>
-      <p>Fresca, dulce y llena de frutas.</p>
-      <p class="precio">Bs 80</p>
-    </article>
+      <!-- Controles de búsqueda y filtrado por categoría -->
+      <div class="controles">
+        <input type="search" id="buscador" placeholder="Buscar pastel por nombre...">
+        <div id="filtros">
+          <button type="button" data-categoria="todos" class="activo">Todos</button>
+          <button type="button" data-categoria="pastel">Pastel</button>
+          <button type="button" data-categoria="chocolate">Chocolate</button>
+          <button type="button" data-categoria="frutal">Frutal</button>
+          <button type="button" data-categoria="dulce">Dulce</button>
+        </div>
+        <p id="resultado"></p>
+      </div>
 
-    <article class="pastel">
-      <img src="tres leches.jpg" alt="Torta tres leches">
-      <h3>Tres leches</h3>
-      <p>Suave, cremosa y deliciosa.</p>
-      <p class="precio">Bs 150</p>
-    </article>
+      <!-- Las tarjetas ya no se escriben a mano: render.js las genera desde datos.js -->
+      <div id="lista-productos" class="contenedor-pasteles"></div>
+    </section>
 
-  </div>
-</section>
-            </section id="horarios">
-            <h2>Horario</h2> 
-            <p>Lunes a sabado, de 09:00 a 13:00 y de 15:00 a 20.00.</p>
-            </section>
-             <table>
-          <caption>Precios de los pasteles y disponibilidad</caption>
-          <thead>
-            <tr>
-              <th scope="col">Pasteles</th>
-              <th scope="col">Precio</th>
-              <th scope="col">Disponible</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Pastel de dia a día</td>   <td>Bs 40</td>  <td>Todos los días</td></tr>
-            <tr><td>Selva negra</td>  <td>Bs 100</td>  <td>Todos los días</td></tr>
-            <tr><td>Torta frutal</td>  <td>Bs 80</td> <td>Lunes y jueves</td></tr>
-            <tr><td>Tres leches</td>  <td>Bs 150</td> <td>Lunes y sabado</td></tr>
-          </tbody>
-        </table>
-        
-      </section>
-       <section id="pedido">
-        <h2>Hacer un pedido</h2>
+    <section id="horarios">
+      <h2>Horario</h2>
+      <p>Lunes a sábado, de 09:00 a 13:00 y de 15:00 a 20:00.</p>
 
-        <form action="/pedido" method="post">
+      <table>
+        <caption>Precios de los pasteles y disponibilidad</caption>
+        <thead>
+          <tr>
+            <th scope="col">Pasteles</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Disponible</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Pastel del día</td>
+            <td>Bs 40</td>
+            <td>Todos los días</td>
+          </tr>
+          <tr>
+            <td>Selva negra</td>
+            <td>Bs 100</td>
+            <td>Todos los días</td>
+          </tr>
+          <tr>
+            <td>Torta frutal</td>
+            <td>Bs 80</td>
+            <td>Lunes y jueves</td>
+          </tr>
+          <tr>
+            <td>Tres leches</td>
+            <td>Bs 150</td>
+            <td>Lunes y sábado</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
 
-          <fieldset>
-            <legend>Tus datos</legend>
+    <section id="pedido">
+      <h2>Hacer un pedido</h2>
 
-            <p>
-              <label for="nombre">Nombre completo</label>
-              <!-- autocomplete deja que el navegador ofrezca datos ya guardados.
+      <form action="/pedido" method="post">
+
+        <fieldset>
+          <legend>Tus datos</legend>
+
+          <p>
+            <label for="nombre">Nombre completo</label>
+            <!-- autocomplete deja que el navegador ofrezca datos ya guardados.
                    required hace que el navegador impida enviar el campo vacío. -->
-              <input type="text" id="nombre" name="nombre"
-                     autocomplete="name" required>
-            </p>
+            <input type="text" id="nombre" name="nombre" autocomplete="name" required>
+          </p>
 
-            <p>
-              <label for="email">Correo electrónico</label>
-              <input type="email" id="email" name="email"
-                     autocomplete="email" required>
-            </p>
+          <p>
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" name="email" autocomplete="email" required>
+          </p>
 
-            <p>
-              <label for="telefono">Teléfono</label>
-              <!-- pattern valida con una expresión regular: aquí, de 7 a 8 dígitos.
+          <p>
+            <label for="telefono">Teléfono</label>
+            <!-- pattern valida con una expresión regular: aquí, de 7 a 8 dígitos.
                    El title es el mensaje que el navegador muestra si no cumple.
                    Sin title, el aviso de error no dice qué se espera. -->
-              <input type="tel" id="telefono" name="telefono"
-                     autocomplete="tel" pattern="[0-9]{7,8}"
-                     title="7 u 8 dígitos, sin espacios">
-            </p>
-          </fieldset>
+            <input type="tel" id="telefono" name="telefono" autocomplete="tel" pattern="[0-9]{7,8}"
+              title="7 u 8 dígitos, sin espacios">
+          </p>
+        </fieldset>
 
-          <fieldset>
-            <legend>Tu pedido</legend>
+        <fieldset>
+          <legend>Tu pedido</legend>
 
-            <p>
-              <label for="Pasteles">pasteles</label>
-              <!-- La primera <option> va vacía a propósito: con required,
+          <p>
+            <label for="producto">Pastel</label>
+            <!-- La primera <option> va vacía a propósito: con required,
                    obliga a elegir en vez de aceptar la primera por descuido. -->
-              <select id="producto" name="producto" required>
-                <option value="">Elige uno</option>
-                <option value="pastel-dia">Pastel del día</option>
-                <option value="torta-frutal">Torta frutal</option>
-                <option value="selva-negra">Selva negra</option>
-                <option value="tres-leches">Tres leches</option></option>
-              </select>
-            </p>
+            <select id="producto" name="producto" required>
+              <option value="">Elige uno</option>
+              <option value="pastel-dia">Pastel del día</option>
+              <option value="torta-frutal">Torta frutal</option>
+              <option value="selva-negra">Selva negra</option>
+              <option value="tres-leches">Tres leches</option>
+            </select>
+          </p>
 
-            <p>
-              <label for="cantidad">Cantidad</label>
-              <input type="number" id="cantidad" name="cantidad"
-                     min="1" max="100" value="1" required>
-            </p>
+          <p>
+            <label for="cantidad">Cantidad</label>
+            <input type="number" id="cantidad" name="cantidad" min="1" max="100" value="1" required>
+          </p>
 
-            <p>
-              <label for="fecha">Fecha de entrega</label>
-              <input type="date" id="fecha" name="fecha" required>
-            </p>
+          <p>
+            <label for="fecha">Fecha de entrega</label>
+            <input type="date" id="fecha" name="fecha" required>
+          </p>
 
-            <p>
-              <label for="notas">Alguna indicación</label>
-              <textarea id="notas" name="notas" rows="3"></textarea>
-            </p>
+          <p>
+            <label for="notas">Alguna indicación</label>
+            <textarea id="notas" name="notas" rows="3"></textarea>
+          </p>
 
-            <p>
-              <!-- En un checkbox el label va DESPUÉS del input, no antes:
+          <p>
+            <!-- En un checkbox el label va DESPUÉS del input, no antes:
                    así se lee como la frase que el usuario acepta. -->
-              <input type="checkbox" id="terminos" name="terminos" required>
-              <label for="terminos">Acepto que el pedido se confirma por teléfono</label>
-            </p>
-          </fieldset>
+            <input type="checkbox" id="terminos" name="terminos" required>
+            <label for="terminos">Acepto que el pedido se confirma por teléfono</label>
+          </p>
+        </fieldset>
 
-          <!-- type="submit" es el que envía. Sin type explícito un <button>
+        <!-- type="submit" es el que envía. Sin type explícito un <button>
                dentro de un form ya envía, pero declararlo evita sorpresas. -->
-          <button type="submit">Enviar pedido</button>
-        </form>
-      </section>
-            </main>
-            <aside>
-                <h2>¿Sabias?</h2>
-                <p>Calidad y frescura en cada preparación</p>
-                </aside>
-                <footer id="contacto">
-            <h2>Contacto</h2>
-            <address>
-                Av.La Paz 45<br>
-                Teléfono: +591 72068017
-                </address>
-                <p><small>&copy;  dulcetentacion</small></p>
-                
-            
-        </footer>
-    </body>
+        <button type="submit">Enviar pedido</button>
+        <p id="mensaje-pedido" role="status"></p>
+      </form>
+    </section>
+  </main>
+  <aside>
+    <h2>¿Sabías?</h2>
+    <p>Calidad y frescura en cada preparación</p>
+  </aside>
+  <footer id="contacto">
+    <h2>Contacto</h2>
+    <address>
+      Av. La Paz 45<br>
+      Teléfono: +591 72068017
+    </address>
+    <p><small>&copy; dulce tentacion</small></p>
+
+
+  </footer>
+
+  <script src="app.js"></script>
+  <script src="funciones.js"></script>
+  <script src="datos.js"></script>
+  <script src="render.js"></script>
+  <script src="eventos.js"></script>
+</body>
+
 </html>

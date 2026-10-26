@@ -1,21 +1,23 @@
 /* ── 1. EL RESET QUE SE PONE SIEMPRE ───────────────────────────────────── */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 /* ── 2. CUSTOM PROPERTIES: se define una vez, se usa en todos lados ────── */
 :root {
   --color-principal: #C83E75;
-  --color-acento:    #F06292;
-  --color-texto:     #8F405D;
-  --color-suave:     #FAD1DF;
-  --color-fondo:     #FFF0F5;
+  --color-acento: #F06292;
+  --color-texto: #8F405D;
+  --color-suave: #FAD1DF;
+  --color-fondo: #FFF0F5;
   --color-superficie: #ffffff;
-  --borde:           #F2C5D5;
+  --borde: #F2C5D5;
 
-  --espacio:    1rem;
+  --espacio: 1rem;
   --espacio-lg: 2rem;
-  --radio:      4px;
+  --radio: 4px;
 }
 
 /* ── 3. TIPOGRAFÍA ─────────────────────────────────────────────────────── */
@@ -29,23 +31,41 @@ body {
   background: var(--color-fondo);
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   line-height: 1.2;
   color: var(--color-principal);
 }
 
-h1 { font-size: 2rem; margin-bottom: 0.25rem; }
-h2 { font-size: 1.5rem; margin-top: var(--espacio-lg); }
-h3 { font-size: 1.15rem; }
+h1 {
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+}
 
-p { max-width: 65ch; }
+h2 {
+  font-size: 1.5rem;
+  margin-top: var(--espacio-lg);
+}
+
+h3 {
+  font-size: 1.15rem;
+}
+
+p {
+  max-width: 65ch;
+}
 
 /* ── 4. ENLACES Y ESTADOS ──────────────────────────────────────────────── */
 a {
   color: var(--color-principal);
   text-underline-offset: 2px;
 }
-a:hover { color: var(--color-acento); }
+
+a:hover {
+  color: var(--color-acento);
+}
+
 a:focus-visible {
   outline: 3px solid var(--color-acento);
   outline-offset: 2px;
@@ -63,7 +83,10 @@ nav ul {
   padding: 0;
   margin: var(--espacio) 0 0;
 }
-nav li { margin-bottom: 0.4rem; }
+
+nav li {
+  margin-bottom: 0.4rem;
+}
 
 article {
   background: var(--color-superficie);
@@ -80,16 +103,20 @@ table {
   max-width: 40rem;
   background: var(--color-superficie);
 }
+
 caption {
   text-align: left;
   color: var(--color-suave);
   padding-bottom: 0.5rem;
 }
-th, td {
+
+th,
+td {
   text-align: left;
   padding: 0.6rem 0.8rem;
   border-bottom: 1px solid var(--borde);
 }
+
 th {
   background: var(--color-principal);
   color: #fff;
@@ -103,17 +130,22 @@ fieldset {
   margin-bottom: var(--espacio);
   max-width: 32rem;
 }
+
 legend {
   padding: 0 0.4rem;
   font-weight: 600;
   color: var(--color-principal);
 }
+
 label {
   display: block;
   margin-bottom: 0.25rem;
   font-weight: 500;
 }
-input, select, textarea {
+
+input,
+select,
+textarea {
 
   font-size: 1rem;
   font-family: inherit;
@@ -122,7 +154,10 @@ input, select, textarea {
   border: 1px solid var(--borde);
   border-radius: var(--radio);
 }
-input[type="checkbox"] { width: auto; }
+
+input[type="checkbox"] {
+  width: auto;
+}
 
 button {
   font-size: 1rem;
@@ -136,9 +171,15 @@ button {
   border-radius: var(--radio);
   cursor: pointer;
 }
-button:hover { background: var(--color-acento); }
 
-img { max-width: 100%; height: auto; }
+button:hover {
+  background: var(--color-acento);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
 
 footer {
   margin-top: var(--espacio-lg);
@@ -200,6 +241,7 @@ footer {
   transform: translateY(-4px);
   box-shadow: 0 5px 15px #E8A0B433;
 }
+
 :root {
   --color-principal: #c83270;
   --color-acento: #e95791;
@@ -308,7 +350,7 @@ nav a:hover {
   font-size: 1.8rem;
 }
 
-#productos > p {
+#productos>p {
   margin-bottom: 28px;
 }
 
@@ -334,7 +376,7 @@ nav a:hover {
   border-radius: var(--radio);
   box-shadow: 0 5px 18px rgb(112 49 76 / 7%);
   transition: transform 0.2s ease,
-              box-shadow 0.2s ease;
+    box-shadow 0.2s ease;
 }
 
 .contenedor-pasteles .pastel:hover {
@@ -454,10 +496,19 @@ footer {
     padding: 14px;
   }
 }
-@media (min-width: 40rem){
-  h1 { font-size: 2.5rem;}
-  header {padding-inline:var(--espacio-lg)}
-  nav ul{gap: var(--espacio-lg)}
+
+@media (min-width: 40rem) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  header {
+    padding-inline: var(--espacio-lg)
+  }
+
+  nav ul {
+    gap: var(--espacio-lg)
+  }
 }
 
 
@@ -481,7 +532,10 @@ footer {
   flex-direction: column;
   gap: 0.35rem;
 }
-.tarjeta h3 { margin: 0; }
+
+.tarjeta h3 {
+  margin: 0;
+}
 
 .precio {
   font-size: 1.25rem;
@@ -499,9 +553,11 @@ footer {
 .agotado {
   background: var(--color-fondo);
 }
+
 .agotado .precio {
   text-decoration: line-through;
 }
+
 .controles {
   display: flex;
   flex-wrap: wrap;
@@ -528,6 +584,7 @@ footer {
   padding: 0.4rem 0.9rem;
   min-height: 40px;
 }
+
 #filtros button:hover {
   background: var(--color-fondo);
   color: var(--color-principal);
@@ -577,4 +634,84 @@ footer {
   padding-left: 0.75rem;
 }
 
+#panel {
+  margin-top: var(--espacio-lg);
+}
 
+#acordeon .item {
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  margin-bottom: 0.5rem;
+  background: var(--color-superficie);
+}
+
+#acordeon .titulo {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  color: var(--color-principal);
+  border: 0;
+  border-radius: var(--radio);
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  min-height: 44px;
+  cursor: pointer;
+}
+
+#acordeon .titulo:hover {
+  background: var(--color-fondo);
+  color: var(--color-principal);
+}
+
+#acordeon .titulo::after {
+  content: " +";
+  float: right;
+  color: var(--color-acento);
+}
+
+#acordeon .titulo[aria-expanded="true"]::after {
+  content: " −";
+}
+
+#acordeon .cuerpo {
+  padding: 0 1rem 0.8rem;
+}
+
+#acordeon .cuerpo p {
+  margin: 0;
+}
+
+#menu-movil ul {
+  list-style: none;
+  padding: 0.5rem 0 0;
+  margin: 0 0 var(--espacio);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio);
+}
+
+#avisos {
+  list-style: none;
+  padding: 0;
+  margin-top: var(--espacio);
+}
+
+#avisos li {
+  background: var(--color-superficie);
+  border-left: 3px solid var(--color-acento);
+  padding: 0.5rem 0.8rem;
+  margin-bottom: 0.4rem;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+#avisos li:hover {
+  transform: translateX(4px);
+}
+
+#menu-toggle,
+#mostrar-avisos {
+  margin: 0.5rem 0;
+}

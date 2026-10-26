@@ -165,6 +165,50 @@
         <p id="mensaje-pedido" role="status"></p>
       </form>
     </section>
+    <section id="panel">
+      <h2>Panel del proyecto</h2>
+
+      <button type="button" id="menu-toggle" aria-expanded="false" aria-controls="menu-movil">
+        Menú
+      </button>
+      <nav id="menu-movil" hidden>
+        <ul>
+          <li><a href="#productos">Pasteles</a></li>
+          <li><a href="#horarios">Horarios</a></li>
+          <li><a href="#pedido">Pedido</a></li>
+
+        </ul>
+      </nav>
+
+      <div id="acordeon">
+        <div class="item">
+          <button type="button" class="titulo" aria-expanded="false">¿Hacen pedidos por encargo?</button>
+          <div class="cuerpo" hidden>
+            <p>Sí, con 8 horas de anticipación y un mínimo de 1 unidad.</p>
+          </div>
+        </div>
+        <div class="item">
+          <button type="button" class="titulo" aria-expanded="false">¿Tienen delivery?</button>
+          <div class="cuerpo" hidden>
+            <p>Contamos con servicio de motoboy por diferentes zonas del pueblo.</p>
+          </div>
+        </div>
+        <div class="item">
+          <button type="button" class="titulo" aria-expanded="false">¿Qué formas de pago aceptan?</button>
+          <div class="cuerpo" hidden>
+            <p>Efectivo , código QR , transaccion de bancos tigo-money y otros.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" id="mostrar-avisos">Mostrar avisos</button>
+      <ul id="avisos">
+        <li hidden>Hoy tenemos pastel del día recién horneado.</li>
+        <li hidden>Las tortas frutales salen a las 16:00.</li>
+        <li hidden>El lunes cerramos por feriado.</li>
+      </ul>
+    </section>
   </main>
   <aside>
     <h2>¿Sabías?</h2>
@@ -186,6 +230,8 @@
   <script src="datos.js"></script>
   <script src="render.js"></script>
   <script src="eventos.js"></script>
+  <script src="jquery-comparado.js"></script>
+  <script src="jquery-panel.js"></script>
 </body>
 
 </html>

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="es">
 
 <head>
@@ -35,180 +36,257 @@
       <h2>Nuestros pasteles</h2>
       <p>Delicias preparadas con amor para endulzar tu día.</p>
 
-      <!-- Controles de búsqueda y filtrado por categoría -->
-      <div class="controles">
-        <input type="search" id="buscador" placeholder="Buscar pastel por nombre...">
-        <div id="filtros">
-          <button type="button" data-categoria="todos" class="activo">Todos</button>
-          <button type="button" data-categoria="pastel">Pastel</button>
-          <button type="button" data-categoria="chocolate">Chocolate</button>
-          <button type="button" data-categoria="frutal">Frutal</button>
-          <button type="button" data-categoria="dulce">Dulce</button>
-        </div>
-        <p id="resultado"></p>
+  <!-- Controles de búsqueda y filtrado por categoría -->
+  <div class="controles">
+    <input type="search" id="buscador" placeholder="Buscar pastel por nombre...">
+    <div id="filtros">
+      <button type="button" data-categoria="todos" class="activo">Todos</button>
+      <button type="button" data-categoria="pastel">Pastel</button>
+      <button type="button" data-categoria="chocolate">Chocolate</button>
+      <button type="button" data-categoria="frutal">Frutal</button>
+      <button type="button" data-categoria="dulce">Dulce</button>
+    </div>
+    <p id="resultado"></p>
+  </div>
+
+  <!-- Las tarjetas ya no se escriben a mano: render.js las genera desde datos.js -->
+  <div id="lista-productos" class="contenedor-pasteles"></div>
+</section>
+
+<section id="horarios">
+  <h2>Horario</h2>
+  <p>Lunes a sábado, de 09:00 a 13:00 y de 15:00 a 20:00.</p>
+
+  <table>
+    <caption>Precios de los pasteles y disponibilidad</caption>
+    <thead>
+      <tr>
+        <th scope="col">Pasteles</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Disponible</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Pastel del día</td>
+        <td>Bs 40</td>
+        <td>Todos los días</td>
+      </tr>
+      <tr>
+        <td>Selva negra</td>
+        <td>Bs 100</td>
+        <td>Todos los días</td>
+      </tr>
+      <tr>
+        <td>Torta frutal</td>
+        <td>Bs 80</td>
+        <td>Lunes y jueves</td>
+      </tr>
+      <tr>
+        <td>Tres leches</td>
+        <td>Bs 150</td>
+        <td>Lunes y sábado</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="pedido">
+  <h2>Hacer un pedido</h2>
+
+  <form action="/pedido" method="post">
+
+    <fieldset>
+      <legend>Tus datos</legend>
+
+      <p>
+        <label for="nombre">Nombre completo</label>
+        <!-- autocomplete deja que el navegador ofrezca datos ya guardados.
+               required hace que el navegador impida enviar el campo vacío. -->
+        <input type="text" id="nombre" name="nombre" autocomplete="name" required>
+      </p>
+
+      <p>
+        <label for="email">Correo electrónico</label>
+        <input type="email" id="email" name="email" autocomplete="email" required>
+      </p>
+
+      <p>
+        <label for="telefono">Teléfono</label>
+        <!-- pattern valida con una expresión regular: aquí, de 7 a 8 dígitos.
+               El title es el mensaje que el navegador muestra si no cumple.
+               Sin title, el aviso de error no dice qué se espera. -->
+        <input type="tel" id="telefono" name="telefono" autocomplete="tel" pattern="[0-9]{7,8}"
+          title="7 u 8 dígitos, sin espacios">
+      </p>
+    </fieldset>
+
+    <fieldset>
+      <legend>Tu pedido</legend>
+
+      <p>
+        <label for="producto">Pastel</label>
+        <!-- La primera <option> va vacía a propósito: con required,
+               obliga a elegir en vez de aceptar la primera por descuido. -->
+        <select id="producto" name="producto" required>
+          <option value="">Elige uno</option>
+          <option value="pastel-dia">Pastel del día</option>
+          <option value="torta-frutal">Torta frutal</option>
+          <option value="selva-negra">Selva negra</option>
+          <option value="tres-leches">Tres leches</option>
+        </select>
+      </p>
+
+      <p>
+        <label for="cantidad">Cantidad</label>
+        <input type="number" id="cantidad" name="cantidad" min="1" max="100" value="1" required>
+      </p>
+
+      <p>
+        <label for="fecha">Fecha de entrega</label>
+        <input type="date" id="fecha" name="fecha" required>
+      </p>
+
+      <p>
+        <label for="notas">Alguna indicación</label>
+        <textarea id="notas" name="notas" rows="3"></textarea>
+      </p>
+
+      <p>
+        <!-- En un checkbox el label va DESPUÉS del input, no antes:
+               así se lee como la frase que el usuario acepta. -->
+        <input type="checkbox" id="terminos" name="terminos" required>
+        <label for="terminos">Acepto que el pedido se confirma por teléfono</label>
+      </p>
+    </fieldset>
+
+    <!-- type="submit" es el que envía. Sin type explícito un <button>
+           dentro de un form ya envía, pero declararlo evita sorpresas. -->
+    <button type="submit">Enviar pedido</button>
+    <p id="mensaje-pedido" role="status"></p>
+  </form>
+</section>
+<!-- ── ZONA DEL DÍA 14: TABLERO Y GRÁFICO ───────────────────────── -->
+<section id="tablero-zona">
+  <h2>Planificar el día</h2>
+  <p>Arrastra cada producto a la columna que corresponda.</p>
+
+  <div id="tablero">
+    <div class="columna" data-columna="hornear">
+      <h3>Hornear hoy</h3>
+      <ul class="lista-columna"></ul>
+      <p class="total"></p>
+    </div>
+    <div class="columna" data-columna="reponer">
+      <h3>Reponer</h3>
+      <ul class="lista-columna"></ul>
+      <p class="total"></p>
+    </div>
+    <div class="columna" data-columna="pausa">
+      <h3>En pausa</h3>
+      <ul class="lista-columna"></ul>
+      <p class="total"></p>
+    </div>
+  </div>
+
+  <canvas id="grafico" width="600" height="220">
+    Gráfico de los totales por columna. Los valores están en el texto de
+    cada columna.
+  </canvas>
+</section>
+<!-- ── ZONA DEL DÍA 13: LA PÁGINA RECUERDA ──────────────────────── -->
+<section id="preferencias">
+  <h2>Tus preferencias</h2>
+
+  <button type="button" id="tema-toggle" aria-pressed="false">Modo oscuro</button>
+
+  <label for="orden">Ordenar por</label>
+  <select id="orden">
+    <option value="nombre">Nombre</option>
+    <option value="precio">Precio</option>
+    <option value="stock">Stock</option>
+  </select>
+
+  <button type="button" id="olvidar">Olvidar mis preferencias</button>
+
+  <p id="estado-prefs" role="status" aria-live="polite"></p>
+</section>
+
+<!-- ── ZONA DEL DÍA 13: DÓNDE ESTÁ EL USUARIO ───────────────────── -->
+<section id="ubicacion">
+  <h2>¿Estás cerca?</h2>
+  <p>Calculamos la distancia hasta el local. Tu ubicación no sale de tu navegador.</p>
+
+  <button type="button" id="ubicarme">Calcular mi distancia</button>
+  <p id="estado-ubicacion" role="status" aria-live="polite"></p>
+</section>
+<!-- ── ZONA DEL DÍA 12: DATOS QUE LLEGAN POR LA RED ───────────────
+       Los tres estados que SIEMPRE hay que manejar cuando algo llega de
+       afuera: cargando, éxito y error. Una app que no muestra "cargando"
+       y no dice nada cuando falla, está incompleta.
+
+       Los tres contenedores existen desde el principio y se muestran u
+       ocultan según el estado. Es más simple y más accesible que crearlos
+       y destruirlos. -->
+<section id="remoto">
+  <h2>Catálogo del proveedor</h2>
+
+  <button type="button" id="cargar-fetch">Cargar con fetch</button>
+  <button type="button" id="cargar-jquery">Cargar con jQuery</button>
+  <button type="button" id="cargar-roto">Probar un error</button>
+
+  <!-- role="status" hace que el lector de pantalla anuncie el cambio
+         sin robar el foco. Es lo correcto para mensajes de progreso. -->
+  <p id="estado" role="status" aria-live="polite"></p>
+
+  <div id="lista-remota"></div>
+</section>
+
+<section id="panel">
+  <h2>Panel del proyecto</h2>
+
+  <button type="button" id="menu-toggle" aria-expanded="false" aria-controls="menu-movil">
+    Menú
+  </button>
+  <nav id="menu-movil" hidden>
+    <ul>
+      <li><a href="#productos">Pasteles</a></li>
+      <li><a href="#horarios">Horarios</a></li>
+      <li><a href="#pedido">Pedido</a></li>
+
+    </ul>
+  </nav>
+
+  <div id="acordeon">
+    <div class="item">
+      <button type="button" class="titulo" aria-expanded="false">¿Hacen pedidos por encargo?</button>
+      <div class="cuerpo" hidden>
+        <p>Sí, con 8 horas de anticipación y un mínimo de 1 unidad.</p>
       </div>
-
-      <!-- Las tarjetas ya no se escriben a mano: render.js las genera desde datos.js -->
-      <div id="lista-productos" class="contenedor-pasteles"></div>
-    </section>
-
-    <section id="horarios">
-      <h2>Horario</h2>
-      <p>Lunes a sábado, de 09:00 a 13:00 y de 15:00 a 20:00.</p>
-
-      <table>
-        <caption>Precios de los pasteles y disponibilidad</caption>
-        <thead>
-          <tr>
-            <th scope="col">Pasteles</th>
-            <th scope="col">Precio</th>
-            <th scope="col">Disponible</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Pastel del día</td>
-            <td>Bs 40</td>
-            <td>Todos los días</td>
-          </tr>
-          <tr>
-            <td>Selva negra</td>
-            <td>Bs 100</td>
-            <td>Todos los días</td>
-          </tr>
-          <tr>
-            <td>Torta frutal</td>
-            <td>Bs 80</td>
-            <td>Lunes y jueves</td>
-          </tr>
-          <tr>
-            <td>Tres leches</td>
-            <td>Bs 150</td>
-            <td>Lunes y sábado</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section id="pedido">
-      <h2>Hacer un pedido</h2>
-
-      <form action="/pedido" method="post">
-
-        <fieldset>
-          <legend>Tus datos</legend>
-
-          <p>
-            <label for="nombre">Nombre completo</label>
-            <!-- autocomplete deja que el navegador ofrezca datos ya guardados.
-                   required hace que el navegador impida enviar el campo vacío. -->
-            <input type="text" id="nombre" name="nombre" autocomplete="name" required>
-          </p>
-
-          <p>
-            <label for="email">Correo electrónico</label>
-            <input type="email" id="email" name="email" autocomplete="email" required>
-          </p>
-
-          <p>
-            <label for="telefono">Teléfono</label>
-            <!-- pattern valida con una expresión regular: aquí, de 7 a 8 dígitos.
-                   El title es el mensaje que el navegador muestra si no cumple.
-                   Sin title, el aviso de error no dice qué se espera. -->
-            <input type="tel" id="telefono" name="telefono" autocomplete="tel" pattern="[0-9]{7,8}"
-              title="7 u 8 dígitos, sin espacios">
-          </p>
-        </fieldset>
-
-        <fieldset>
-          <legend>Tu pedido</legend>
-
-          <p>
-            <label for="producto">Pastel</label>
-            <!-- La primera <option> va vacía a propósito: con required,
-                   obliga a elegir en vez de aceptar la primera por descuido. -->
-            <select id="producto" name="producto" required>
-              <option value="">Elige uno</option>
-              <option value="pastel-dia">Pastel del día</option>
-              <option value="torta-frutal">Torta frutal</option>
-              <option value="selva-negra">Selva negra</option>
-              <option value="tres-leches">Tres leches</option>
-            </select>
-          </p>
-
-          <p>
-            <label for="cantidad">Cantidad</label>
-            <input type="number" id="cantidad" name="cantidad" min="1" max="100" value="1" required>
-          </p>
-
-          <p>
-            <label for="fecha">Fecha de entrega</label>
-            <input type="date" id="fecha" name="fecha" required>
-          </p>
-
-          <p>
-            <label for="notas">Alguna indicación</label>
-            <textarea id="notas" name="notas" rows="3"></textarea>
-          </p>
-
-          <p>
-            <!-- En un checkbox el label va DESPUÉS del input, no antes:
-                   así se lee como la frase que el usuario acepta. -->
-            <input type="checkbox" id="terminos" name="terminos" required>
-            <label for="terminos">Acepto que el pedido se confirma por teléfono</label>
-          </p>
-        </fieldset>
-
-        <!-- type="submit" es el que envía. Sin type explícito un <button>
-               dentro de un form ya envía, pero declararlo evita sorpresas. -->
-        <button type="submit">Enviar pedido</button>
-        <p id="mensaje-pedido" role="status"></p>
-      </form>
-    </section>
-    <section id="panel">
-      <h2>Panel del proyecto</h2>
-
-      <button type="button" id="menu-toggle" aria-expanded="false" aria-controls="menu-movil">
-        Menú
-      </button>
-      <nav id="menu-movil" hidden>
-        <ul>
-          <li><a href="#productos">Pasteles</a></li>
-          <li><a href="#horarios">Horarios</a></li>
-          <li><a href="#pedido">Pedido</a></li>
-
-        </ul>
-      </nav>
-
-      <div id="acordeon">
-        <div class="item">
-          <button type="button" class="titulo" aria-expanded="false">¿Hacen pedidos por encargo?</button>
-          <div class="cuerpo" hidden>
-            <p>Sí, con 8 horas de anticipación y un mínimo de 1 unidad.</p>
-          </div>
-        </div>
-        <div class="item">
-          <button type="button" class="titulo" aria-expanded="false">¿Tienen delivery?</button>
-          <div class="cuerpo" hidden>
-            <p>Contamos con servicio de motoboy por diferentes zonas del pueblo.</p>
-          </div>
-        </div>
-        <div class="item">
-          <button type="button" class="titulo" aria-expanded="false">¿Qué formas de pago aceptan?</button>
-          <div class="cuerpo" hidden>
-            <p>Efectivo , código QR , transaccion de bancos tigo-money y otros.
-            </p>
-          </div>
-        </div>
+    </div>
+    <div class="item">
+      <button type="button" class="titulo" aria-expanded="false">¿Tienen delivery?</button>
+      <div class="cuerpo" hidden>
+        <p>Contamos con servicio de motoboy por diferentes zonas del pueblo.</p>
       </div>
+    </div>
+    <div class="item">
+      <button type="button" class="titulo" aria-expanded="false">¿Qué formas de pago aceptan?</button>
+      <div class="cuerpo" hidden>
+        <p>Efectivo , código QR , transaccion de bancos tigo-money y otros.
+        </p>
+      </div>
+    </div>
+  </div>
 
-      <button type="button" id="mostrar-avisos">Mostrar avisos</button>
-      <ul id="avisos">
-        <li hidden>Hoy tenemos pastel del día recién horneado.</li>
-        <li hidden>Las tortas frutales salen a las 16:00.</li>
-        <li hidden>El lunes cerramos por feriado.</li>
-      </ul>
-    </section>
+  <button type="button" id="mostrar-avisos">Mostrar avisos</button>
+  <ul id="avisos">
+    <li hidden>Hoy tenemos pastel del día recién horneado.</li>
+    <li hidden>Las tortas frutales salen a las 16:00.</li>
+    <li hidden>El lunes cerramos por feriado.</li>
+  </ul>
+</section>
+
   </main>
   <aside>
     <h2>¿Sabías?</h2>
@@ -222,16 +300,17 @@
     </address>
     <p><small>&copy; dulce tentacion</small></p>
 
-
   </footer>
-
   <script src="app.js"></script>
   <script src="funciones.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="datos.js"></script>
   <script src="render.js"></script>
   <script src="eventos.js"></script>
   <script src="jquery-comparado.js"></script>
   <script src="jquery-panel.js"></script>
+  <script src="remoto.js"></script>
+  <script src="preferencias.js"></script>
 </body>
 
 </html>

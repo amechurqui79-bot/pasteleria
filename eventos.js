@@ -7,80 +7,73 @@ const mensajePedido = document.querySelector("#mensaje-pedido") || resultado;
 
 let categoriaActiva = "todos";
 let textoBuscado = "";
-
-// Configurar la fecha mínima permitida en el formulario (hoy en hora local)
-const fechaInput = formulario ? formulario.querySelector("#fecha") : null;
-const hoyLocal = new Date().toLocaleDateString("en-CA"); // Formato 'YYYY-MM-DD' local
-if (fechaInput) {
-  fechaInput.min = hoyLocal;
-}
+let criterioOrden = "nombre";
 
 // ── 2. UNA SOLA FUNCIÓN QUE DECIDE QUÉ MOSTRAR ──────────────────────────
 function actualizar() {
-  const termino = textoBuscado.trim().toLowerCase();
   const visibles = productos
     .filter(p => categoriaActiva === "todos" || p.categoria === categoriaActiva)
-    .filter(p => p.nombre.toLowerCase().includes(termino));
+    .filter(p => p.nombre.toLowerCase().includes(textoBuscado.toLowerCase()));
+
+  if (criterioOrden === "precio") {
+    visibles.sort((a, b) => a.precio - b.precio);
+  } else if (criterioOrden === "stock") {
+    visibles.sort((a, b) => b.stock - a.stock);
+  } else if (criterioOrden === "nombre") {
+    visibles.sort((a, b) => a.nombre.localeCompare(b.nombre, "es"));
+  }
 
   render(visibles);
-  if (resultado) {
-    resultado.textContent = `${visibles.length} de ${productos.length} productos`;
-  }
+  resultado.textContent = `${visibles.length} de ${productos.length} productos`;
 }
 
 actualizar();
 
 // ── 3. EL EVENTO input ──────────────────────────────────────────────────
-if (buscador) {
-  buscador.addEventListener("input", (event) => {
-    textoBuscado = event.target.value;
-    actualizar();
-  });
-}
+buscador.addEventListener("input", (event) => {
+  textoBuscado = event.target.value;
+  actualizar();
+});
 
 // ── 4. DELEGACIÓN DE EVENTOS ────────────────────────────────────────────
-if (filtros) {
-  filtros.addEventListener("click", (event) => {
-    const boton = event.target.closest("button");
-    if (!boton) return;
+filtros.addEventListener("click", (event) => {
 
-    categoriaActiva = boton.dataset.categoria;
+  const boton = event.target.closest("button");
+  if (!boton) return;
 
-    filtros.querySelectorAll("button").forEach(b => b.classList.remove("activo"));
-    boton.classList.add("activo");
+  categoriaActiva = boton.dataset.categoria;
 
-    actualizar();
-  });
-}
+  filtros.querySelectorAll("button").forEach(b => b.classList.remove("activo"));
+  boton.classList.add("activo");
+
+  actualizar();
+});
 
 // ── 5. EL EVENTO submit Y preventDefault ────────────────────────────────
-if (formulario) {
-  formulario.addEventListener("submit", (event) => {
-    event.preventDefault();
+formulario.addEventListener("submit", (event) => {
+  event.preventDefault();
 
-    if (!formulario.reportValidity()) {
-      return;
-    }
+  if (!formulario.reportValidity()) {
+    return;
+  }
 
-    const fecha = formulario.querySelector("#fecha");
-    const hoy = new Date().toLocaleDateString("en-CA");
-    if (fecha && fecha.value < hoy) {
-      fecha.setCustomValidity("La fecha de entrega no puede ser anterior a hoy.");
-      fecha.reportValidity();
+  const fecha = formulario.querySelector("#fecha");
+  const hoy = new Date().toISOString().slice(0, 10);
+  if (fecha.value < hoy) {
 
-      fecha.addEventListener("input", () => fecha.setCustomValidity(""), { once: true });
-      return;
-    }
+    fecha.setCustomValidity("La fecha de entrega no puede ser anterior a hoy.");
+    fecha.reportValidity();
 
-    const datos = Object.fromEntries(new FormData(formulario));
-    console.log("Pedido recibido:", datos);
+    fecha.addEventListener("input", () => fecha.setCustomValidity(""), { once: true });
+    return;
+  }
 
-    if (mensajePedido) {
-      mensajePedido.textContent = `Gracias ${datos.nombre}, el pedido quedó registrado.`;
-    }
-    formulario.reset();
-  });
-}
+  const datos = Object.fromEntries(new FormData(formulario));
+  console.log("Pedido recibido:", datos);
+
+  mensajePedido.textContent = `Gracias ${datos.nombre}, el pedido quedó registrado.`;
+  formulario.reset();
+});
 
 // ── 6. EXPRESIONES REGULARES, LO JUSTO ──────────────────────────────────
 const PATRONES = {

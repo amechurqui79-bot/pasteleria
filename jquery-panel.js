@@ -1,9 +1,5 @@
-/* ═════════════════════════════════════════════════════════════════════════
-   DÍA 11 - Panel del proyecto con jQuery
-   ═════════════════════════════════════════════════════════════════════════ */
-
 $(function () {
-  // ── 1. .on() ES LA FORMA ÚNICA (Menú móvil) ───────────────────────────
+  // ── 1. .on() ES LA FORMA ÚNICA ──────────────────────────────────────────
   $("#menu-toggle").on("click", function () {
     const $menu = $("#menu-movil");
 
@@ -16,10 +12,10 @@ $(function () {
     });
 
     const abierto = $(this).attr("aria-expanded") === "true";
-    $(this).attr("aria-expanded", String(!abierto));
+    $(this).attr("aria-expanded", !abierto);
   });
 
-  // ── 2. DELEGACIÓN, EN UNA LÍNEA (Acordeón de Preguntas Frecuentes) ──────
+  // ── 2. DELEGACIÓN, EN UNA LÍNEA ─────────────────────────────────────────
   $("#acordeon").on("click", ".titulo", function () {
     const $titulo = $(this);
     const $cuerpo = $titulo.next(".cuerpo");
@@ -32,61 +28,62 @@ $(function () {
       }
     });
 
-    const abierto = $titulo.attr("aria-expanded") === "true";
-    $titulo.attr("aria-expanded", String(!abierto));
+    $titulo.attr("aria-expanded", $titulo.attr("aria-expanded") !== "true");
 
-    // Acordeón exclusivo: cierra las otras respuestas abiertas
     $("#acordeon .cuerpo").not($cuerpo).stop(true, true).slideUp(200, function () {
       $(this).attr("hidden", "");
     });
     $("#acordeon .titulo").not($titulo).attr("aria-expanded", "false");
   });
 
-  // ── 3. LOS EFECTOS (Interacción y desvanecimiento) ─────────────────────
-  // Al hacer clic en un aviso específico, se desvanece suavemente
+  // ── 3. LOS EFECTOS ──────────────────────────────────────────────────────
+  // Al hacer clic en un aviso de la pastelería, se oculta suavemente
   $("#avisos").on("click", "li", function () {
-    $(this).fadeOut(300, function () {
+    $(this).fadeOut(250, function () {
       $(this).attr("hidden", "");
     });
   });
 
-  // Efecto sutil de opacidad al pasar el cursor sobre los avisos
-  $("#avisos").on("mouseenter", "li", function () {
-    $(this).stop(true, true).fadeTo(150, 0.85);
-  }).on("mouseleave", "li", function () {
-    $(this).stop(true, true).fadeTo(150, 1);
-  });
+  // Efecto de enfoque suave al pasar el cursor por los avisos del horno
+  $("#avisos")
+    .on("mouseenter", "li", function () {
+      $(this).stop(true, true).fadeTo(150, 0.85);
+    })
+    .on("mouseleave", "li", function () {
+      $(this).stop(true, true).fadeTo(150, 1);
+    });
 
-  // ── 4. .each() Y EL ESCALONADO (Mostrar / Ocultar avisos en cascada) ───
-  function mostrarAvisos() {
+  // ── 4. .each() Y EL ESCALONADO ──────────────────────────────────────────
+  function mostrarAvisosPasteleria() {
     $("#avisos li").each(function (indice) {
       $(this)
         .stop(true, true)
-        .delay(indice * 140)
+        .delay(indice * 120)
         .fadeIn(250, function () {
           $(this).removeAttr("hidden");
         });
     });
+
     $("#mostrar-avisos")
-      .text("Ocultar avisos")
+      .text("Ocultar avisos del día")
       .off("click")
-      .on("click", ocultarAvisos);
+      .on("click", ocultarAvisosPasteleria);
   }
 
-  function ocultarAvisos() {
+  function ocultarAvisosPasteleria() {
     $("#avisos li").stop(true, true).fadeOut(200, function () {
       $(this).attr("hidden", "");
     });
+
     $("#mostrar-avisos")
-      .text("Mostrar avisos")
+      .text("Ver avisos de horneado")
       .off("click")
-      .on("click", mostrarAvisos);
+      .on("click", mostrarAvisosPasteleria);
   }
 
-  $("#mostrar-avisos").on("click", mostrarAvisos);
+  $("#mostrar-avisos").on("click", mostrarAvisosPasteleria);
 
-  // ── 5. .animate(), PARA LO QUE NO CUBRE UN EFECTO (Scroll suave) ───────
-  // Desplazamiento animado suave al hacer clic en los enlaces del menú
+  // ── 5. .animate(), PARA LO QUE NO CUBRE UN EFECTO ───────────────────────
   $('a[href^="#"]').on("click", function (evento) {
     const destinoId = $(this).attr("href");
     const $destino = $(destinoId);
@@ -94,7 +91,6 @@ $(function () {
     if ($destino.length) {
       evento.preventDefault();
 
-      // Si el menú móvil está desplegado, cerrarlo suavemente
       if ($("#menu-movil").is(":visible")) {
         $("#menu-movil").slideUp(200, function () {
           $(this).attr("hidden", "");
@@ -102,13 +98,16 @@ $(function () {
         $("#menu-toggle").attr("aria-expanded", "false");
       }
 
-      $("html, body").stop().animate({
-        scrollTop: $destino.offset().top - 15
-      }, 500);
+      $("html, body").stop().animate(
+        {
+          scrollTop: $destino.offset().top - 16,
+        },
+        450
+      );
     }
   });
 
-  // ── 6. UNA FUNCIÓN PROPIA QUE DEVUELVE LA SELECCIÓN (Chaining) ─────────
+  // ── 6. UNA FUNCIÓN PROPIA QUE DEVUELVE LA SELECCIÓN ─────────────────────
   function resaltar($seleccion, milisegundos = 1200) {
     $seleccion.addClass("resaltado");
     setTimeout(() => $seleccion.removeClass("resaltado"), milisegundos);
@@ -117,5 +116,3 @@ $(function () {
 
   resaltar($("#panel h2")).css("letter-spacing", "0.5px");
 });
-
-

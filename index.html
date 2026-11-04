@@ -1,316 +1,447 @@
 <!DOCTYPE html>
-
 <html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pastelería artesanal de barrio Dulce Tentación. Pasteles del día, selva negra, tortas frutales y tres leches.">
+    <title>Dulce Tentación — Tienda en Línea</title>
+    <link rel="icon" type="image/jpeg" href="img/logo.jpg">
+    <link rel="stylesheet" href="estilos.css">
+  </head>
+  <body>
+    <!-- ── ZONA DEL DÍA 13: PREFERENCIAS ARRIBA AL INICIO DE LA PÁGINA ──── -->
+    <section id="preferencias" class="barra-preferencias">
+      <div class="preferencias-controles">
+        <h2>Tus preferencias</h2>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Pasteleria del barrio.">
-  <title>Dulce Tentación</title>
-  <link rel="icon" type="image/jpeg" href="logo.jpg">
-  <link rel="stylesheet" href="estilos.css">
-</head>
+        <button type="button" id="tema-toggle" aria-pressed="false">Modo oscuro</button>
 
-<body>
-  <header>
-    <div class="marca">
-      <img src="logo.jpg" alt="Logo de Dulce Tentación" class="logo">
-      <div class="marca-texto">
-        <h1>Dulce Tentación</h1>
-        <p>Pastelería del barrio</p>
-        <p id="aviso-stock"></p>
-      </div>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="#productos">Pasteles</a></li>
-        <li><a href="#horarios">Horarios</a></li>
-        <li><a href="#pedido">Hacer pedido</a></li>
-        <li><a href="#contacto">Contacto</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <section id="productos">
-      <h2>Nuestros pasteles</h2>
-      <p>Delicias preparadas con amor para endulzar tu día.</p>
-
-  <!-- Controles de búsqueda y filtrado por categoría -->
-  <div class="controles">
-    <input type="search" id="buscador" placeholder="Buscar pastel por nombre...">
-    <div id="filtros">
-      <button type="button" data-categoria="todos" class="activo">Todos</button>
-      <button type="button" data-categoria="pastel">Pastel</button>
-      <button type="button" data-categoria="chocolate">Chocolate</button>
-      <button type="button" data-categoria="frutal">Frutal</button>
-      <button type="button" data-categoria="dulce">Dulce</button>
-    </div>
-    <p id="resultado"></p>
-  </div>
-
-  <!-- Las tarjetas ya no se escriben a mano: render.js las genera desde datos.js -->
-  <div id="lista-productos" class="contenedor-pasteles"></div>
-</section>
-
-<section id="horarios">
-  <h2>Horario</h2>
-  <p>Lunes a sábado, de 09:00 a 13:00 y de 15:00 a 20:00.</p>
-
-  <table>
-    <caption>Precios de los pasteles y disponibilidad</caption>
-    <thead>
-      <tr>
-        <th scope="col">Pasteles</th>
-        <th scope="col">Precio</th>
-        <th scope="col">Disponible</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Pastel del día</td>
-        <td>Bs 40</td>
-        <td>Todos los días</td>
-      </tr>
-      <tr>
-        <td>Selva negra</td>
-        <td>Bs 100</td>
-        <td>Todos los días</td>
-      </tr>
-      <tr>
-        <td>Torta frutal</td>
-        <td>Bs 80</td>
-        <td>Lunes y jueves</td>
-      </tr>
-      <tr>
-        <td>Tres leches</td>
-        <td>Bs 150</td>
-        <td>Lunes y sábado</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
-
-<section id="pedido">
-  <h2>Hacer un pedido</h2>
-
-  <form action="/pedido" method="post">
-
-    <fieldset>
-      <legend>Tus datos</legend>
-
-      <p>
-        <label for="nombre">Nombre completo</label>
-        <!-- autocomplete deja que el navegador ofrezca datos ya guardados.
-               required hace que el navegador impida enviar el campo vacío. -->
-        <input type="text" id="nombre" name="nombre" autocomplete="name" required>
-      </p>
-
-      <p>
-        <label for="email">Correo electrónico</label>
-        <input type="email" id="email" name="email" autocomplete="email" required>
-      </p>
-
-      <p>
-        <label for="telefono">Teléfono</label>
-        <!-- pattern valida con una expresión regular: aquí, de 7 a 8 dígitos.
-               El title es el mensaje que el navegador muestra si no cumple.
-               Sin title, el aviso de error no dice qué se espera. -->
-        <input type="tel" id="telefono" name="telefono" autocomplete="tel" pattern="[0-9]{7,8}"
-          title="7 u 8 dígitos, sin espacios">
-      </p>
-    </fieldset>
-
-    <fieldset>
-      <legend>Tu pedido</legend>
-
-      <p>
-        <label for="producto">Pastel</label>
-        <!-- La primera <option> va vacía a propósito: con required,
-               obliga a elegir en vez de aceptar la primera por descuido. -->
-        <select id="producto" name="producto" required>
-          <option value="">Elige uno</option>
-          <option value="pastel-dia">Pastel del día</option>
-          <option value="torta-frutal">Torta frutal</option>
-          <option value="selva-negra">Selva negra</option>
-          <option value="tres-leches">Tres leches</option>
+        <label for="orden">Ordenar por</label>
+        <select id="orden">
+          <option value="nombre">Nombre</option>
+          <option value="precio">Precio</option>
+          <option value="stock">Stock</option>
         </select>
-      </p>
 
-      <p>
-        <label for="cantidad">Cantidad</label>
-        <input type="number" id="cantidad" name="cantidad" min="1" max="100" value="1" required>
-      </p>
-
-      <p>
-        <label for="fecha">Fecha de entrega</label>
-        <input type="date" id="fecha" name="fecha" required>
-      </p>
-
-      <p>
-        <label for="notas">Alguna indicación</label>
-        <textarea id="notas" name="notas" rows="3"></textarea>
-      </p>
-
-      <p>
-        <!-- En un checkbox el label va DESPUÉS del input, no antes:
-               así se lee como la frase que el usuario acepta. -->
-        <input type="checkbox" id="terminos" name="terminos" required>
-        <label for="terminos">Acepto que el pedido se confirma por teléfono</label>
-      </p>
-    </fieldset>
-
-    <!-- type="submit" es el que envía. Sin type explícito un <button>
-           dentro de un form ya envía, pero declararlo evita sorpresas. -->
-    <button type="submit">Enviar pedido</button>
-    <p id="mensaje-pedido" role="status"></p>
-  </form>
-</section>
-<!-- ── ZONA DEL DÍA 14: TABLERO Y GRÁFICO ───────────────────────── -->
-<section id="tablero-zona">
-  <h2>Planificar el día</h2>
-  <p>Arrastra cada producto a la columna que corresponda.</p>
-
-  <div id="tablero">
-    <div class="columna" data-columna="hornear">
-      <h3>Hornear hoy</h3>
-      <ul class="lista-columna"></ul>
-      <p class="total"></p>
-    </div>
-    <div class="columna" data-columna="reponer">
-      <h3>Reponer</h3>
-      <ul class="lista-columna"></ul>
-      <p class="total"></p>
-    </div>
-    <div class="columna" data-columna="pausa">
-      <h3>En pausa</h3>
-      <ul class="lista-columna"></ul>
-      <p class="total"></p>
-    </div>
-  </div>
-
-  <canvas id="grafico" width="600" height="220">
-    Gráfico de los totales por columna. Los valores están en el texto de
-    cada columna.
-  </canvas>
-</section>
-<!-- ── ZONA DEL DÍA 13: LA PÁGINA RECUERDA ──────────────────────── -->
-<section id="preferencias">
-  <h2>Tus preferencias</h2>
-
-  <button type="button" id="tema-toggle" aria-pressed="false">Modo oscuro</button>
-
-  <label for="orden">Ordenar por</label>
-  <select id="orden">
-    <option value="nombre">Nombre</option>
-    <option value="precio">Precio</option>
-    <option value="stock">Stock</option>
-  </select>
-
-  <button type="button" id="olvidar">Olvidar mis preferencias</button>
-
-  <p id="estado-prefs" role="status" aria-live="polite"></p>
-</section>
-
-<!-- ── ZONA DEL DÍA 13: DÓNDE ESTÁ EL USUARIO ───────────────────── -->
-<section id="ubicacion">
-  <h2>¿Estás cerca?</h2>
-  <p>Calculamos la distancia hasta el local. Tu ubicación no sale de tu navegador.</p>
-
-  <button type="button" id="ubicarme">Calcular mi distancia</button>
-  <p id="estado-ubicacion" role="status" aria-live="polite"></p>
-</section>
-<!-- ── ZONA DEL DÍA 12: DATOS QUE LLEGAN POR LA RED ───────────────
-       Los tres estados que SIEMPRE hay que manejar cuando algo llega de
-       afuera: cargando, éxito y error. Una app que no muestra "cargando"
-       y no dice nada cuando falla, está incompleta.
-
-       Los tres contenedores existen desde el principio y se muestran u
-       ocultan según el estado. Es más simple y más accesible que crearlos
-       y destruirlos. -->
-<section id="remoto">
-  <h2>Catálogo del proveedor</h2>
-
-  <button type="button" id="cargar-fetch">Cargar con fetch</button>
-  <button type="button" id="cargar-jquery">Cargar con jQuery</button>
-  <button type="button" id="cargar-roto">Probar un error</button>
-
-  <!-- role="status" hace que el lector de pantalla anuncie el cambio
-         sin robar el foco. Es lo correcto para mensajes de progreso. -->
-  <p id="estado" role="status" aria-live="polite"></p>
-
-  <div id="lista-remota"></div>
-</section>
-
-<section id="panel">
-  <h2>Panel del proyecto</h2>
-
-  <button type="button" id="menu-toggle" aria-expanded="false" aria-controls="menu-movil">
-    Menú
-  </button>
-  <nav id="menu-movil" hidden>
-    <ul>
-      <li><a href="#productos">Pasteles</a></li>
-      <li><a href="#horarios">Horarios</a></li>
-      <li><a href="#pedido">Pedido</a></li>
-
-    </ul>
-  </nav>
-
-  <div id="acordeon">
-    <div class="item">
-      <button type="button" class="titulo" aria-expanded="false">¿Hacen pedidos por encargo?</button>
-      <div class="cuerpo" hidden>
-        <p>Sí, con 8 horas de anticipación y un mínimo de 1 unidad.</p>
+        <button type="button" id="olvidar">Olvidar mis preferencias</button>
       </div>
-    </div>
-    <div class="item">
-      <button type="button" class="titulo" aria-expanded="false">¿Tienen delivery?</button>
-      <div class="cuerpo" hidden>
-        <p>Contamos con servicio de motoboy por diferentes zonas del pueblo.</p>
+
+      <p id="estado-prefs" role="status" aria-live="polite"></p>
+    </section>
+
+    <!-- ── HEADER: identidad, contacto rápido y navegación principal ────── -->
+    <header>
+      <div class="marca">
+        <img src="img/logo.jpg" alt="Logo de Dulce Tentación" class="logo">
+        <div class="marca-texto">
+          <h1>Dulce Tentación</h1>
+          <p>Pastelería artesanal del barrio</p>
+          <p id="aviso-stock"></p>
+        </div>
       </div>
-    </div>
-    <div class="item">
-      <button type="button" class="titulo" aria-expanded="false">¿Qué formas de pago aceptan?</button>
-      <div class="cuerpo" hidden>
-        <p>Efectivo , código QR , transaccion de bancos tigo-money y otros.
-        </p>
+
+      <nav>
+        <ul>
+          <li><a href="#productos">Comprar pasteles</a></li>
+          <li><a href="#tablero-zona">Mi carrito</a></li>
+          <li><a href="#pedido">Pedidos por encargo</a></li>
+          <li><a href="#horarios">Horarios y precios</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <a href="#tablero-zona" class="header-carrito-pill" aria-label="Ir al carrito de compras">
+        <span>🛒 Carrito</span>
+        <strong id="header-carrito-contador">2 (Bs 250.00)</strong>
+      </a>
+    </header>
+
+    <!-- ── MAIN: el contenido propio de esta página. Uno solo por documento. -->
+    <main>
+
+      <!-- ── VITRINA DESTACADA ESTILO EDUCATODO (COMPRA Y PEDIDOS) ──────── -->
+      <section class="edu-hero" aria-labelledby="titulo-apertura">
+        <div class="edu-hero__story">
+          <p class="edu-eyebrow">TIENDA EN LÍNEA · DULCE TENTACIÓN</p>
+          <h2 id="titulo-apertura">Pastelería artesanal <span>para endulzar cada celebración.</span></h2>
+          <p class="edu-hero__intro">
+            Compra pasteles recién horneados, tortas de chocolate, frutales y tres leches con envío a domicilio o reserva tu pedido para eventos especiales.
+          </p>
+          <div class="edu-hero__actions">
+            <a class="edu-cta edu-cta--primario" href="#productos">Comprar pasteles ↓</a>
+            <a class="edu-cta edu-cta--secundario" href="#pedido">Hacer pedido por encargo →</a>
+          </div>
+          <p class="edu-hero__nota">Consulta fotos, existencias y calcula tu envío gratis en tiempo real.</p>
+        </div>
+
+        <div class="edu-hero__showcase">
+          <p class="edu-showcase-label">ELIGE TU PRÓXIMO PASTEL FAVORITO</p>
+          <div class="edu-showcase-grid">
+            <article class="edu-showcase-card edu-showcase-card--lead">
+              <img src="img/selva-negra-1.jpg" alt="Selva negra artesanal">
+              <div class="edu-showcase-meta">
+                <div>
+                  <span class="edu-badge">Más vendido</span>
+                  <h3>Selva negra</h3>
+                  <p class="edu-showcase-price">Bs 100.00</p>
+                </div>
+                <button type="button" class="boton-compra-directa" data-comprar-hero="Selva negra">
+                  Agregar al carrito
+                </button>
+              </div>
+            </article>
+
+            <article class="edu-showcase-card">
+              <img src="img/tres-leches.jpg" alt="Torta Tres leches">
+              <div class="edu-showcase-meta">
+                <div>
+                  <h3>Tres leches</h3>
+                  <p class="edu-showcase-price">Bs 150.00</p>
+                </div>
+                <button type="button" class="boton-compra-directa" data-comprar-hero="Tres leches">
+                  Agregar al carrito
+                </button>
+              </div>
+            </article>
+
+            <article class="edu-showcase-card">
+              <img src="img/torta-frutal.jpg" alt="Torta frutal fresca">
+              <div class="edu-showcase-meta">
+                <div>
+                  <h3>Torta frutal</h3>
+                  <p class="edu-showcase-price">Bs 80.00</p>
+                </div>
+                <button type="button" class="boton-compra-directa" data-comprar-hero="Torta frutal">
+                  Agregar al carrito
+                </button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── TIENDA PRINCIPAL: PRODUCTOS A LA IZQUIERDA Y CARRITO AL LADO ─ -->
+      <div class="tienda-principal">
+
+        <!-- ── COLUMNA IZQUIERDA: MIS PRODUCTOS ─────────────────────────── -->
+        <section id="productos">
+          <div class="seccion-encabezado">
+            <p class="edu-eyebrow">CATÁLOGO DE LA PASTELERÍA</p>
+            <h2>Nuestros pasteles para compra directa</h2>
+            <p>Usa los botones <strong>Agregar al carrito</strong>, <strong>Pedir por encargo</strong> o arrastra cualquier tarjeta hacia el tablero de compra de la derecha.</p>
+          </div>
+
+          <!-- ── LOS CONTROLES QUE USA eventos.js ────────────────────── -->
+          <div class="controles" role="search">
+            <label for="buscador" class="visualmente-oculto">Buscar pastel</label>
+            <input type="search" id="buscador" placeholder="Buscar pastel por nombre...">
+
+            <div id="filtros">
+              <button type="button" data-categoria="todos" class="activo">Todos</button>
+              <button type="button" data-categoria="pastel">Pastel</button>
+              <button type="button" data-categoria="chocolate">Chocolate</button>
+              <button type="button" data-categoria="frutal">Frutal</button>
+              <button type="button" data-categoria="dulce">Dulce</button>
+            </div>
+          </div>
+
+          <p id="resultado" aria-live="polite"></p>
+
+          <div id="lista-productos" class="contenedor-pasteles"></div>
+        </section>
+
+        <!-- ── COLUMNA DERECHA: CARRITO, ENVÍO Y TABLERO (DÍA 14) ───────── -->
+        <section id="tablero-zona" class="zona-carrito-estetica">
+          <div class="tablero-cabecera">
+            <div>
+              <p class="edu-eyebrow">COMPRA RÁPIDA Y COTIZACIÓN</p>
+              <h2>🛒 Tu Carrito y Tablero de Pedido</h2>
+            </div>
+            <div class="resumen-rapido-carrito" aria-live="polite">
+              <span class="etiqueta-resumen">Total estimado</span>
+              <strong id="total-destacado-carrito">Bs 0.00</strong>
+            </div>
+          </div>
+
+          <!-- ── CALCULADORA DE ENVÍO CON BARRA DE PROGRESO (ESTILO EDUCATODO) -->
+          <div class="edu-shipping">
+            <div class="edu-shipping__heading">
+              <span class="edu-shipping__title">🚚 Tu envío o entrega</span>
+              <label class="edu-shipping__destination" for="zona-envio">
+                <span class="visualmente-oculto">Elige tu zona de entrega</span>
+                <select id="zona-envio">
+                  <option value="barrio">Zona Barrio (radio 10 cuadras)</option>
+                  <option value="ciudad">Resto de la ciudad (Motoboy)</option>
+                  <option value="tienda">Recojo en pastelería (Gratis)</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="edu-shipping__zone">
+              <div class="edu-shipping__zone-header">
+                <span id="envio-nombre-zona">Zona Barrio (10 cuadras)</span>
+                <strong id="envio-tarifa-actual">Envío Bs 10.00</strong>
+              </div>
+              <p id="envio-restante" class="edu-shipping__remaining" aria-live="polite">
+                Calculando avance para envío gratis...
+              </p>
+              <div class="edu-shipping__progress" role="progressbar" aria-label="Avance hacia el envío gratis" aria-valuemin="0" aria-valuemax="100" id="barra-envio-contenedor">
+                <span class="edu-shipping__fill" id="barra-envio-fill" style="width: 0%"></span>
+              </div>
+              <span id="envio-meta-texto" class="edu-shipping__threshold">Envío gratis desde Bs 150.00</span>
+            </div>
+          </div>
+
+          <!-- ── TABLERO DRAG & DROP DE 3 SECCIONES ──────────────────── -->
+          <div id="tablero">
+            <div class="columna columna-carrito" data-columna="carrito">
+              <div class="columna-titulo">
+                <h3>🛍️ Mi carrito (Comprar ahora)</h3>
+                <span class="insignia-columna insignia-acento" data-contador="carrito">0</span>
+              </div>
+              <ul class="lista-columna"></ul>
+              <p class="total"></p>
+            </div>
+
+            <div class="columnas-secundarias">
+              <div class="columna" data-columna="vitrina">
+                <div class="columna-titulo">
+                  <h3>🍰 Vitrina rápida</h3>
+                  <span class="insignia-columna" data-contador="vitrina">0</span>
+                </div>
+                <ul class="lista-columna"></ul>
+                <p class="total"></p>
+              </div>
+
+              <div class="columna" data-columna="favoritos">
+                <div class="columna-titulo">
+                  <h3>📋 Para encargo / después</h3>
+                  <span class="insignia-columna" data-contador="favoritos">0</span>
+                </div>
+                <ul class="lista-columna"></ul>
+                <p class="total"></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-checkout">
+            <div class="desglose-compra">
+              <div class="dato-checkout">
+                <span>Unidades</span>
+                <strong id="checkout-unidades">0 u.</strong>
+              </div>
+              <div class="dato-checkout">
+                <span>Subtotal</span>
+                <strong id="checkout-subtotal">Bs 0.00</strong>
+              </div>
+              <div class="dato-checkout">
+                <span>Delivery</span>
+                <strong id="checkout-envio">Bs 0.00</strong>
+              </div>
+              <div class="dato-checkout dato-total">
+                <span>Total a pagar</span>
+                <strong id="checkout-total">Bs 0.00</strong>
+              </div>
+            </div>
+
+            <div class="acciones-compra">
+              <button type="button" id="confirmar-compra" class="boton-comprar">Comprar ahora</button>
+              <button type="button" id="pasar-a-pedido" class="boton-encargo">Hacer pedido con fecha →</button>
+              <button type="button" id="vaciar-carrito" class="boton-secundario">Vaciar</button>
+            </div>
+          </div>
+
+          <p id="mensaje-compra" role="status" aria-live="polite"></p>
+        </section>
+
       </div>
-    </div>
-  </div>
 
-  <button type="button" id="mostrar-avisos">Mostrar avisos</button>
-  <ul id="avisos">
-    <li hidden>Hoy tenemos pastel del día recién horneado.</li>
-    <li hidden>Las tortas frutales salen a las 16:00.</li>
-    <li hidden>El lunes cerramos por feriado.</li>
-  </ul>
-</section>
+      <!-- ── FORMULARIO ACCESIBLE DE PEDIDOS Y EVENTOS ────────────────── -->
+      <section id="pedido" class="seccion-pedido-destacada">
+        <div class="pedido-intro">
+          <p class="edu-eyebrow">EVENTOS · CUMPLEAÑOS · PEDIDOS PROGRAMADOS</p>
+          <h2>Hacer un pedido o reserva</h2>
+          <p>Programa tu entrega para una fecha especial o transfiere los pasteles de tu carrito con un clic para confirmar tu pedido por teléfono.</p>
+        </div>
 
-  </main>
-  <aside>
-    <h2>¿Sabías?</h2>
-    <p>Calidad y frescura en cada preparación</p>
-  </aside>
-  <footer id="contacto">
-    <h2>Contacto</h2>
-    <address>
-      Av. La Paz 45<br>
-      Teléfono: +591 72068017
-    </address>
-    <p><small>&copy; dulce tentacion</small></p>
+        <form action="/pedido" method="post">
 
-  </footer>
-  <script src="app.js"></script>
-  <script src="funciones.js"></script>
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="datos.js"></script>
-  <script src="render.js"></script>
-  <script src="eventos.js"></script>
-  <script src="jquery-comparado.js"></script>
-  <script src="jquery-panel.js"></script>
-  <script src="remoto.js"></script>
-  <script src="preferencias.js"></script>
-</body>
+          <fieldset>
+            <legend>Tus datos</legend>
 
+            <p>
+              <label for="nombre">Nombre completo</label>
+              <input type="text" id="nombre" name="nombre"
+                     autocomplete="name" required>
+            </p>
+
+            <p>
+              <label for="email">Correo electrónico</label>
+              <input type="email" id="email" name="email"
+                     autocomplete="email" required>
+            </p>
+
+            <p>
+              <label for="telefono">Teléfono</label>
+              <input type="tel" id="telefono" name="telefono"
+                     autocomplete="tel" pattern="[0-9]{7,8}"
+                     title="7 u 8 dígitos, sin espacios">
+            </p>
+          </fieldset>
+
+          <fieldset>
+            <legend>Tu pedido</legend>
+
+            <p>
+              <label for="producto">Pastel principal</label>
+              <select id="producto" name="producto" required>
+                <option value="">Elige uno</option>
+                <option value="pastel-dia">Pastel del día</option>
+                <option value="selva-negra">Selva negra</option>
+                <option value="torta-frutal">Torta frutal</option>
+                <option value="tres-leches">Tres leches</option>
+              </select>
+            </p>
+
+            <p>
+              <label for="cantidad">Cantidad total</label>
+              <input type="number" id="cantidad" name="cantidad"
+                     min="1" max="100" value="1" required>
+            </p>
+
+            <p>
+              <label for="fecha">Fecha de entrega</label>
+              <input type="date" id="fecha" name="fecha" required>
+            </p>
+
+            <p>
+              <label for="notas">Detalle del carrito o dedicatoria en el pastel</label>
+              <textarea id="notas" name="notas" rows="3" placeholder="Ej. Feliz cumpleaños María, o el resumen de tu carrito..."></textarea>
+            </p>
+
+            <p>
+              <input type="checkbox" id="terminos" name="terminos" required>
+              <label for="terminos">Acepto que el pedido se confirma por teléfono</label>
+            </p>
+          </fieldset>
+
+          <button type="submit">Enviar pedido</button>
+          <p id="mensaje-pedido" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <!-- ── TABLA ─────────────────────────────────────────────────────── -->
+      <section id="horarios">
+        <h2>Horarios y precios</h2>
+        <p>Lunes a sábado, de 09:00 a 13:00 y de 15:00 a 20:00.</p>
+
+        <table>
+          <caption>Precios de los pasteles y disponibilidad</caption>
+          <thead>
+            <tr>
+              <th scope="col">Pastel</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Disponible</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Pastel del día</td> <td>Bs 40.00</td>  <td>Todos los días</td></tr>
+            <tr><td>Selva negra</td>    <td>Bs 100.00</td> <td>Todos los días</td></tr>
+            <tr><td>Torta frutal</td>   <td>Bs 80.00</td>  <td>Lunes y jueves</td></tr>
+            <tr><td>Tres leches</td>    <td>Bs 150.00</td> <td>Lunes y sábado</td></tr>
+          </tbody>
+        </table>
+
+        <!-- ── FIGURE e IMG ──────────────────────────────────────────── -->
+        <figure class="vitrina">
+          <img src="vitri.png"
+               alt="Pasteles  horneados artesanales recién preparados en nuestra vitrina"
+               width="600" height="400">
+          <figcaption>Nuestras preparaciones artesanales recién horneadas a primera hora de la mañana.</figcaption>
+        </figure>
+      </section>
+
+      <!-- ── ZONA DEL DÍA 13: DÓNDE ESTÁ EL USUARIO ───────────────────── -->
+      <section id="ubicacion">
+        <h2>¿Estás cerca?</h2>
+        <p>Calculamos la distancia hasta la pastelería. Tu ubicación no sale de tu navegador.</p>
+
+        <button type="button" id="ubicarme">Calcular mi distancia</button>
+        <p id="estado-ubicacion" role="status" aria-live="polite"></p>
+      </section>
+     <!-- ── PANEL DEL DÍA 11 ──────────────────────────────────────────── -->
+      <section id="panel">
+        <h2>Preguntas frecuentes y avisos de horneado</h2>
+
+        <button type="button" id="menu-toggle" aria-expanded="false" aria-controls="menu-movil">
+          Menú rápido de la pastelería
+        </button>
+        <nav id="menu-movil" hidden>
+          <ul>
+            <li><a href="#preferencias">Preferencias</a></li>
+            <li><a href="#productos">Pasteles</a></li>
+            <li><a href="#tablero-zona">Comprar</a></li>
+            <li><a href="#horarios">Horarios</a></li>
+            <li><a href="#pedido">Hacer pedido</a></li>
+            <li><a href="#remoto">Proveedores</a></li>
+          </ul>
+        </nav>
+
+        <div id="acordeon">
+          <div class="item">
+            <button type="button" class="titulo" aria-expanded="false">¿Con cuánta anticipación debo encargar un pastel?</button>
+            <div class="cuerpo" hidden>
+              <p>Para nuestros pasteles del catálogo diario pedimos 8 horas de anticipación (mínimo 1 unidad). Para tortas temáticas o personalizadas, 24 horas.</p>
+            </div>
+          </div>
+          <div class="item">
+            <button type="button" class="titulo" aria-expanded="false">¿Tienen servicio de delivery a domicilio?</button>
+            <div class="cuerpo" hidden>
+              <p>Sí, contamos con entrega cuidadosa por motoboy en diferentes zonas de la ciudad para que tu pastel llegue intacto y fresco.</p>
+            </div>
+          </div>
+          <div class="item">
+            <button type="button" class="titulo" aria-expanded="false">¿Qué formas de pago aceptan en Dulce Tentación?</button>
+            <div class="cuerpo" hidden>
+              <p>Aceptamos efectivo, pago por código QR, transferencia bancaria y Tigo Money.</p>
+            </div>
+          </div>
+          <div class="item">
+            <button type="button" class="titulo" aria-expanded="false">¿Preparan pasteles sin lactosa o bajos en azúcar?</button>
+            <div class="cuerpo" hidden>
+              <p>Sí, bajo pedido podemos elaborar nuestra Torta Frutal, Tres Leches o Queque de Plátano con insumos deslactosados o endulzante natural.</p>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" id="mostrar-avisos">Ver avisos de horneado</button>
+        <ul id="avisos">
+          <li hidden>Hoy tenemos Pastel del día y Selva Negra recién salidos del horno.</li>
+          <li hidden>Las tortas frutales con frutillas frescas salen a las 16:00.</li>
+          <li hidden>Reservando tu Torta Tres Leches por la web tienes decoración personalizada sin cargo.</li>
+        </ul>
+      </section>
+
+    </main>
+    <footer id="contacto">
+      <h2>Dónde estamos</h2>
+      <address>
+        Av. La Paz 45<br>
+        Teléfono: +591 72068017
+      </address>
+      <p><small>&copy; 2026 Dulce Tentación</small></p>
+    </footer>
+
+    <script src="jquery-3.7.1.min.js"></script>
+
+    <script src="app.js"></script>
+    <script src="funciones.js"></script>
+    <script src="datos.js"></script>
+    <script src="render.js"></script>
+    <script src="eventos.js"></script>
+    <script src="jquery-panel.js"></script>
+    <script src="preferencias.js"></script>
+    <script src="tablero.js"></script>
+
+  </body>
 </html>

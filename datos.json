@@ -1,0 +1,202 @@
+{
+  "_nota": "Datos del catálogo y proveedores de la Pastelería Dulce Tentación para las prácticas desde el Día 12 en adelante.",
+  "negocio": {
+    "nombre": "Pastelería Dulce Tentación",
+    "direccion": "Av. La Paz 45",
+    "coordenadas": {
+      "lat": -16.5,
+      "lng": -68.15
+    },
+    "horario": {
+      "apertura": "09:00",
+      "cierre": "20:00",
+      "dias": "Lunes a sábado"
+    }
+  },
+  "categorias": [
+    "Pastel",
+    "Chocolate",
+    "Frutal",
+    "Dulce",
+    "Tortas",
+    "Insumos"
+  ],
+  "productos": [
+    {
+      "id": 1,
+      "nombre": "Pastel del día",
+      "categoria": "Pastel",
+      "precio": 40.00,
+      "unidad": "unidad",
+      "stock": 20,
+      "disponible": true,
+      "imagen": "img/pastel-del-dia.jpg",
+      "proveedor": null
+    },
+    {
+      "id": 2,
+      "nombre": "Selva negra",
+      "categoria": "Chocolate",
+      "precio": 100.00,
+      "unidad": "unidad",
+      "stock": 10,
+      "disponible": true,
+      "imagen": "img/selva-negra-1.jpg",
+      "proveedor": null
+    },
+    {
+      "id": 3,
+      "nombre": "Torta frutal",
+      "categoria": "Frutal",
+      "precio": 80.00,
+      "unidad": "unidad",
+      "stock": 8,
+      "disponible": true,
+      "imagen": "img/torta-frutal.jpg",
+      "proveedor": null
+    },
+    {
+      "id": 4,
+      "nombre": "Tres leches",
+      "categoria": "Dulce",
+      "precio": 150.00,
+      "unidad": "unidad",
+      "stock": 5,
+      "disponible": true,
+      "imagen": "img/tres-leches.jpg",
+      "proveedor": null
+    },
+    {
+      "id": 5,
+      "nombre": "Torta en vaso",
+      "categoria": "Dulce",
+      "precio": 15.00,
+      "unidad": "unidad",
+      "stock": 14,
+      "disponible": true,
+      "imagen": "img/torta-en-vaso.jpg",
+      "proveedor": null
+    },
+    {
+      "id": 6,
+      "nombre": "Torta de chocolate",
+      "categoria": "Chocolate",
+      "precio": 90.00,
+      "unidad": "unidad",
+      "stock": 6,
+      "disponible": true,
+      "imagen": "img/torta-chocolate.jpg",
+      "proveedor": null
+    },
+    {
+      "id": 7,
+      "nombre": "Torta de frutilla",
+      "categoria": "Frutal",
+      "precio": 70.00,
+      "unidad": "unidad",
+      "stock": 4,
+      "disponible": true,
+      "imagen": "img/torta-frutilla.jpg",
+      "proveedor": null
+    },
+    {
+      "id": 8,
+      "nombre": "Queque de plátano",
+      "categoria": "Dulce",
+      "precio": 30.00,
+      "unidad": "unidad",
+      "stock": 12,
+      "disponible": true,
+      "imagen": "img/queque-platano.jpg",
+      "proveedor": null
+    },
+    {
+      "id": 9,
+      "nombre": "Queque de vainilla",
+      "categoria": "Dulce",
+      "precio": 30.00,
+      "unidad": "unidad",
+      "stock": 10,
+      "disponible": true,
+      "imagen": "img/queque-vainilla.jpg",
+      "proveedor": null
+    },
+    {
+      "id": 10,
+      "nombre": "Cheesecake de frutos",
+      "categoria": "Frutal",
+      "precio": 95.00,
+      "unidad": "unidad",
+      "stock": 3,
+      "disponible": true,
+      "imagen": "img/cheesecake-frutos.jpg",
+      "proveedor": null
+    },
+    {
+      "id": 11,
+      "nombre": "Brownie con nuez",
+      "categoria": "Chocolate",
+      "precio": 12.00,
+      "unidad": "porción",
+      "stock": 25,
+      "disponible": true,
+      "imagen": "img/brownie-nuez.jpg",
+      "proveedor": null
+    },
+    {
+      "id": 12,
+      "nombre": "Alfajor artesanal",
+      "categoria": "Dulce",
+      "precio": 5.00,
+      "unidad": "unidad",
+      "stock": 40,
+      "disponible": true,
+      "imagen": "img/alfajor-maicena.jpg",
+      "proveedor": null
+    },
+    {
+      "id": 13,
+      "nombre": "Crema chantilly",
+      "categoria": "Insumos",
+      "precio": 28.00,
+      "unidad": "litro",
+      "stock": 15,
+      "disponible": true,
+      "imagen": "img/tres-leches.jpg",
+      "proveedor": "Lácteos del Valle"
+    },
+    {
+      "id": 14,
+      "nombre": "Chocolate cobertura",
+      "categoria": "Insumos",
+      "precio": 65.00,
+      "unidad": "kg",
+      "stock": 10,
+      "disponible": true,
+      "imagen": "img/torta-chocolate.jpg",
+      "proveedor": "Cacao Real"
+    },
+    {
+      "id": 15,
+      "nombre": "Frutillas frescas",
+      "categoria": "Insumos",
+      "precio": 22.00,
+      "unidad": "kg",
+      "stock": 8,
+      "disponible": true,
+      "imagen": "img/torta-frutilla.jpg",
+      "proveedor": "Huerta del Sol"
+    },
+    {
+      "id": 16,
+      "nombre": "Vitrina de hojaldres",
+      "categoria": "Pastel",
+      "precio": 14.00,
+      "unidad": "unidad",
+      "stock": 0,
+      "disponible": false,
+      "imagen": "img/vitrina-pasteleria.jpg",
+      "proveedor": "Molino del Sur"
+    }
+  ]
+}
